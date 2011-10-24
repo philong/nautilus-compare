@@ -1,0 +1,2 @@
+debian/tmp/usr/share/locale
+/src/nautilus-compare.py /usr/share/nautilus-python/extensions/

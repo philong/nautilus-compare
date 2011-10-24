@@ -1,0 +1,16 @@
+Source: nautilus-compare
+Section: gnome
+Priority: extra
+Maintainer: Guido Tabbernuk <boamaod@gmail.com>
+Build-Depends: debhelper (>= 7)
+Standards-Version: 3.9.1.0
+Homepage: https://launchpad.net/nautilus-compare
+
+Package: nautilus-compare
+Architecture: any
+Depends: nautilus (>= 3), python-nautilus (>= 1.0), meld
+Description: Context menu extension for Nautilus file manager
+ Simple context menu file comparison extension for Nautilus 3.0 and above,
+ inspired by discontinued diff-ext extension. It uses Meld to do the actual
+ comparison and provides "Compare", "Compare later" and "Compare to ~/my/file"
+ in Nautilus context menu.
