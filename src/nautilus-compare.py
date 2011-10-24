@@ -134,7 +134,7 @@ n-way compare
 				if self.for_later not in paths:
 					item1 = Nautilus.MenuItem(
 						name="NautilusCompareExtension::MultiCompare",
-						label=_('Tree-Way Compare to') + self.for_later,
+						label=_('Three-Way Compare to ') + self.for_later,
 						tip=_("Compare selected files to the file remembered before")
 					)
 					# compare the one saved for later to the ones selected now

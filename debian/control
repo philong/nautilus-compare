@@ -12,6 +12,8 @@ Depends: nautilus (>= 3), python-nautilus (>= 1.0), python-xdg
 Recommends: meld
 Description: Context menu extension for Nautilus file manager
  Simple context menu file comparison extension for Nautilus 3.0 and above,
- inspired by discontinued diff-ext extension. It uses Meld to do the actual
- comparison and provides "Compare", "Compare later" and "Compare to ~/my/file"
- in Nautilus context menu.
+ inspired by the discontinued diff-ext extension. It uses Meld to do the
+ actual comparison and provides "Compare", "Compare Later", "Compare to
+ ~/foo/bar" and "Three-Way Compare to ~/foo/bar" in Nautilus context menu.
+ You can change default Meld to whatever you like from
+ ~/.config/nautilus-compare.conf.
