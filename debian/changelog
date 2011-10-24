@@ -1,4 +1,4 @@
-nautilus-compare (0.0.2~oneiric1) oneiric; urgency=low
+nautilus-compare (0.0.2~oneiric2) oneiric; urgency=medium
 
   * Fix l10n and only "recommend" Meld.
 
