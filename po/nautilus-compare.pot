@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-24 01:11+0300\n"
+"POT-Creation-Date: 2011-10-24 18:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,26 +17,34 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: nautilus-compare.py:85
+#: nautilus-compare.py:115
 msgid "Compare to "
 msgstr ""
 
-#: nautilus-compare.py:86
+#: nautilus-compare.py:116
 msgid "Compare to the file remembered before"
 msgstr ""
 
-#: nautilus-compare.py:95
-msgid "Compare later"
+#: nautilus-compare.py:125
+msgid "Compare Later"
 msgstr ""
 
-#: nautilus-compare.py:96
+#: nautilus-compare.py:126
 msgid "Remember file for later comparison"
 msgstr ""
 
-#: nautilus-compare.py:103
+#: nautilus-compare.py:137
+msgid "Tree-Way Compare to"
+msgstr ""
+
+#: nautilus-compare.py:138
+msgid "Compare selected files to the file remembered before"
+msgstr ""
+
+#: nautilus-compare.py:145
 msgid "Compare"
 msgstr ""
 
-#: nautilus-compare.py:104
+#: nautilus-compare.py:146
 msgid "Compare selected files"
 msgstr ""

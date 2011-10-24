@@ -18,17 +18,40 @@ import os
 import urllib
 import gettext
 import locale
+import xdg.BaseDirectory
+import ConfigParser
 
 from gi.repository import Nautilus, GObject, Gio
 
 APP = 'nautilus-compare'
+SETTINGS_MAIN = 'Settings'
+DIFF_PATH = 'diff_engine_path'
+DIFF_PATH_3WAY = 'diff_engine_path_3way'
+DEFAULT_DIFF_ENGINE = 'meld'
 
 class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 
 	for_later = None
+	diff_engine = DEFAULT_DIFF_ENGINE
+	diff_engine_3way = DEFAULT_DIFF_ENGINE
 
 	def __init__(self):
-		pass
+		config_dir = xdg.BaseDirectory.xdg_config_home
+		if not config_dir:
+			config_dir = os.path.join(os.getenv("HOME"), ".config")
+		config_file = os.path.join(config_dir, APP + ".conf")
+		config = ConfigParser.ConfigParser()
+		sections = config.read(config_file)
+
+		try:
+			self.diff_engine = config.get(SETTINGS_MAIN, DIFF_PATH)
+			self.diff_engine_3way = config.get(SETTINGS_MAIN, DIFF_PATH_3WAY)
+		except:
+			config.add_section(SETTINGS_MAIN)
+			config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
+			config.set(SETTINGS_MAIN, DIFF_PATH_3WAY, self.diff_engine_3way)
+			with open(config_file, 'wb') as f:
+				config.write(f)
 
 	def _open_comparator(self, paths):
 		if len(paths) == 1:
@@ -38,15 +61,19 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		args = ""
 		for path in paths:
 			args += "\"%s\" " % path
-		cmd = ("meld " + args + "&")
+		if len(paths)==2:
+			cmd = (self.diff_engine + " " + args + "&")
+		else:
+			cmd = (self.diff_engine_3way + " " + args + "&")
 		os.system(cmd)
 		
 	def menu_activate_cb(self, menu, paths):
-
 		self._open_comparator(paths)
 
 	def valid_file(self, file):
-		if file.get_uri_scheme() == 'file' and file.get_file_type() in (Gio.FileType.DIRECTORY, Gio.FileType.REGULAR, Gio.FileType.SYMBOLIC_LINK):
+		if file.get_uri_scheme() == 'file' and file.get_file_type() in
+(Gio.FileType.DIRECTORY, Gio.FileType.REGULAR,
+Gio.FileType.SYMBOLIC_LINK):
 			return True
 		else:
 			return False
@@ -63,12 +90,17 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			return
 
 		# initialize i18n
+		locale.setlocale(locale.LC_ALL, '')
 		gettext.bindtextdomain(APP)
 		gettext.textdomain(APP)
 		_ = gettext.gettext
 
 		item1 = None
 		item2 = None
+		item3 = None
+
+		# for paths with remembered items
+		new_paths = list(paths)
 
 		# exactly one file selected
 		if len(paths) == 1:
@@ -77,7 +109,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			if self.for_later is not None:
 
 				# we don't want to compare file to itself
-				if paths[0] != self.for_later:
+				if self.for_later not in paths:
 					item1 = Nautilus.MenuItem(
 						name="NautilusCompareExtension::CompareTo",
 						label=_('Compare to ') + self.for_later,
@@ -85,30 +117,43 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 					)
 
 					# compare the one saved for later to the one selected now
-					paths.insert(0, self.for_later)
+					new_paths.insert(0, self.for_later)
 
 			# if only one file selected, we offer to remember it for later anyway
-			item2 = Nautilus.MenuItem(
+			item3 = Nautilus.MenuItem(
 				name="NautilusCompareExtension::CompareLater",
-				label=_('Compare later'),
+				label=_('Compare Later'),
 				tip=_("Remember file for later comparison")
 			)
 
 		# can always compare, if more than one selected
 		else:
-			item1 = Nautilus.MenuItem(
+			# if we have already saved one file and add some more, we can do
+n-way compare
+			if self.for_later is not None:
+				if self.for_later not in paths:
+					item1 = Nautilus.MenuItem(
+						name="NautilusCompareExtension::MultiCompare",
+						label=_('Tree-Way Compare to') + self.for_later,
+						tip=_("Compare selected files to the file remembered before")
+					)
+					# compare the one saved for later to the ones selected now
+					new_paths.insert(0, self.for_later)
+
+			item2 = Nautilus.MenuItem(
 				name="NautilusCompareExtension::CompareWithin",
 				label=_('Compare'),
 				tip=_("Compare selected files")
 			)
 
-		if item1: item1.connect('activate', self.menu_activate_cb, paths)
-		if item2: item2.connect('activate', self.menu_activate_cb, [paths[-1]])
+		if item1: item1.connect('activate', self.menu_activate_cb, new_paths)
+		if item2: item2.connect('activate', self.menu_activate_cb, paths)
+		if item3: item3.connect('activate', self.menu_activate_cb, paths)
 
-		items = [item1, item2]
+		items = [item1, item2, item3]
 
-		for item in items:
-			if item is None: items.remove(item)
+		while None in items:
+			items.remove(None)
 
 		return items
 

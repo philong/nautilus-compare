@@ -8,7 +8,7 @@ Homepage: https://launchpad.net/nautilus-compare
 
 Package: nautilus-compare
 Architecture: any
-Depends: nautilus (>= 3), python-nautilus (>= 1.0)
+Depends: nautilus (>= 3), python-nautilus (>= 1.0), python-xdg
 Recommends: meld
 Description: Context menu extension for Nautilus file manager
  Simple context menu file comparison extension for Nautilus 3.0 and above,

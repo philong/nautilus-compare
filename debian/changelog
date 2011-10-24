@@ -1,3 +1,11 @@
+nautilus-compare (0.0.3~oneiric1) oneiric; urgency=medium
+
+  * Add settings under ~/.config/nautilus-compare.conf
+  * Implement explicit three-way compare
+  * Reorder menu items ("Compare Later" always last one)
+
+ -- Guido Tabbernuk <boamaod@gmail.com>  Mon, 24 Oct 2011 18:23:59 +0300
+
 nautilus-compare (0.0.2~oneiric2) oneiric; urgency=medium
 
   * Fix l10n and only "recommend" Meld.
