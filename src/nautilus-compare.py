@@ -62,8 +62,9 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		if len(paths) < 1:
 			return
 
-		# initialise i18n
+		# initialize i18n
 		gettext.bindtextdomain(APP)
+		gettext.textdomain(APP)
 		_ = gettext.gettext
 
 		item1 = None
