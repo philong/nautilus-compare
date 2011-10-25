@@ -71,9 +71,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		self._open_comparator(paths)
 
 	def valid_file(self, file):
-		if file.get_uri_scheme() == 'file' and file.get_file_type() in
-(Gio.FileType.DIRECTORY, Gio.FileType.REGULAR,
-Gio.FileType.SYMBOLIC_LINK):
+		if file.get_uri_scheme() == 'file' and file.get_file_type() in (Gio.FileType.DIRECTORY, Gio.FileType.REGULAR, Gio.FileType.SYMBOLIC_LINK):
 			return True
 		else:
 			return False
@@ -128,8 +126,7 @@ Gio.FileType.SYMBOLIC_LINK):
 
 		# can always compare, if more than one selected
 		else:
-			# if we have already saved one file and add some more, we can do
-n-way compare
+			# if we have already saved one file and add some more, we can do n-way compare
 			if self.for_later is not None:
 				if self.for_later not in paths:
 					item1 = Nautilus.MenuItem(
