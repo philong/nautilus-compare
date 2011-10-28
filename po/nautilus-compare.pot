@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2011-10-24 20:52+0300\n"
+"POT-Creation-Date: 2011-10-29 02:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,34 +17,46 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: nautilus-compare.py:115
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
 msgid "Compare to "
 msgstr ""
 
-#: nautilus-compare.py:116
+#: src/nautilus-compare.py:107
 msgid "Compare to the file remembered before"
 msgstr ""
 
-#: nautilus-compare.py:125
+#: src/nautilus-compare.py:116
 msgid "Compare Later"
 msgstr ""
 
-#: nautilus-compare.py:126
+#: src/nautilus-compare.py:117
 msgid "Remember file for later comparison"
 msgstr ""
 
-#: nautilus-compare.py:137
-msgid "Three-Way Compare to "
-msgstr ""
-
-#: nautilus-compare.py:138
+#: src/nautilus-compare.py:130
 msgid "Compare selected files to the file remembered before"
 msgstr ""
 
-#: nautilus-compare.py:145
+#: src/nautilus-compare.py:141
 msgid "Compare"
 msgstr ""
 
-#: nautilus-compare.py:146
+#: src/nautilus-compare.py:142
 msgid "Compare selected files"
+msgstr ""
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr ""
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr ""
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr ""
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
 msgstr ""
