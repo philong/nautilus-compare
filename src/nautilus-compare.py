@@ -27,31 +27,42 @@ APP = 'nautilus-compare'
 SETTINGS_MAIN = 'Settings'
 DIFF_PATH = 'diff_engine_path'
 DIFF_PATH_3WAY = 'diff_engine_path_3way'
-DEFAULT_DIFF_ENGINE = 'meld'
+DIFF_PATH_MULTI = 'diff_engine_path_multi'
+COMPARATORS = 'defined_comparators'
+PREDEFINED_ENGINES = ['', 'diffuse', 'fldiff', 'kdiff3', 'kompare', 'meld', 'tkdiff']
+DEFAULT_DIFF_ENGINE = "meld"
+CONFIG_FILE = os.path.join(xdg.BaseDirectory.xdg_config_home, APP + ".conf")
 
 class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
+	'''Class for Nautilus extension itself'''
 
 	for_later = None
 	diff_engine = DEFAULT_DIFF_ENGINE
 	diff_engine_3way = DEFAULT_DIFF_ENGINE
+	diff_engine_multi = ""
 
 	def __init__(self):
-		config_dir = xdg.BaseDirectory.xdg_config_home
-		if not config_dir:
-			config_dir = os.path.join(os.getenv("HOME"), ".config")
-		config_file = os.path.join(config_dir, APP + ".conf")
-		config = ConfigParser.ConfigParser()
-		sections = config.read(config_file)
+		'''Load config'''
+
+		self.config = ConfigParser.ConfigParser()
+		sections = self.config.read(CONFIG_FILE)
 
 		try:
-			self.diff_engine = config.get(SETTINGS_MAIN, DIFF_PATH)
-			self.diff_engine_3way = config.get(SETTINGS_MAIN, DIFF_PATH_3WAY)
-		except:
-			config.add_section(SETTINGS_MAIN)
-			config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
-			config.set(SETTINGS_MAIN, DIFF_PATH_3WAY, self.diff_engine_3way)
-			with open(config_file, 'wb') as f:
-				config.write(f)
+			self.diff_engine = self.config.get(SETTINGS_MAIN, DIFF_PATH)
+			self.diff_engine_3way = self.config.get(SETTINGS_MAIN, DIFF_PATH_3WAY)
+			self.diff_engine_multi = self.config.get(SETTINGS_MAIN, DIFF_PATH_MULTI)
+			self.engines = eval(self.config.get(SETTINGS_MAIN, COMPARATORS))
+		except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
+			try:
+				self.config.add_section(SETTINGS_MAIN)
+			except ConfigParser.DuplicateSectionError:
+				pass
+			self.config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
+			self.config.set(SETTINGS_MAIN, DIFF_PATH_3WAY, self.diff_engine_3way)
+			self.config.set(SETTINGS_MAIN, DIFF_PATH_MULTI, self.diff_engine_multi)
+			self.config.set(SETTINGS_MAIN, COMPARATORS, self.engines)
+			with open(CONFIG_FILE, 'wb') as f:
+				self.config.write(f)
 
 	def _open_comparator(self, paths):
 		if len(paths) == 1:
@@ -61,11 +72,17 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		args = ""
 		for path in paths:
 			args += "\"%s\" " % path
-		if len(paths)==2:
+
+		cmd = None
+		if len(paths) == 2:
 			cmd = (self.diff_engine + " " + args + "&")
-		else:
+		elif len(paths) == 3 and len(self.diff_engine_3way.strip()) > 0:
 			cmd = (self.diff_engine_3way + " " + args + "&")
-		os.system(cmd)
+		elif len(self.diff_engine_multi.strip()) > 0:
+			cmd = (self.diff_engine_multi + " " + args + "&")
+
+		if cmd is not None:
+			os.system(cmd)
 		
 	def menu_activate_cb(self, menu, paths):
 		self._open_comparator(paths)
@@ -126,22 +143,28 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 
 		# can always compare, if more than one selected
 		else:
-			# if we have already saved one file and add some more, we can do n-way compare
+			# if we have already remembered one file and add some more, we can do n-way compare
 			if self.for_later is not None:
 				if self.for_later not in paths:
-					item1 = Nautilus.MenuItem(
-						name="NautilusCompareExtension::MultiCompare",
-						label=_('Three-Way Compare to ') + self.for_later,
-						tip=_("Compare selected files to the file remembered before")
-					)
-					# compare the one saved for later to the ones selected now
-					new_paths.insert(0, self.for_later)
+					# if multi compare enabled and in case of 2 files selected 3way compare enabled
+					if len(self.diff_engine_multi.strip()) > 0 or (len(paths) == 2 and len(self.diff_engine_3way.strip()) > 0):
+						item1 = Nautilus.MenuItem(
+							name="NautilusCompareExtension::MultiCompare",
+							label=_('Compare to ') + self.for_later,
+							tip=_("Compare selected files to the file remembered before")
+						)
+						# compare the one saved for later to the ones selected now
+						new_paths.insert(0, self.for_later)
 
-			item2 = Nautilus.MenuItem(
-				name="NautilusCompareExtension::CompareWithin",
-				label=_('Compare'),
-				tip=_("Compare selected files")
-			)
+			# if multi compare enabled, we can compare any number
+			# if there are two files selected we can always compare
+			# if three files selected and 3-way compare is on, we can do it
+			if len(self.diff_engine_multi.strip()) > 0 or len(paths) == 2 or (len(paths) == 3 and len(self.diff_engine_3way.strip()) > 0):
+				item2 = Nautilus.MenuItem(
+					name="NautilusCompareExtension::CompareWithin",
+					label=_('Compare'),
+					tip=_("Compare selected files")
+				)
 
 		if item1: item1.connect('activate', self.menu_activate_cb, new_paths)
 		if item2: item2.connect('activate', self.menu_activate_cb, paths)
@@ -153,4 +176,5 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			items.remove(None)
 
 		return items
+
 
