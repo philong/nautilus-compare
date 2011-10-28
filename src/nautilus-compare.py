@@ -1,4 +1,6 @@
-#    nautilus-compare: An context menu extension for Nautilus file manager
+#!/usr/bin/python
+# -*- coding: utf-8 -*-
+#    nautilus-compare --- Context menu extension for Nautilus file manager
 #    Copyright (C) 2011  Guido Tabbernuk <boamaod@gmail.com>
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -14,57 +16,32 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import sys
 import os
 import urllib
 import gettext
 import locale
-import xdg.BaseDirectory
-import ConfigParser
 
 from gi.repository import Nautilus, GObject, Gio
 
-APP = 'nautilus-compare'
-SETTINGS_MAIN = 'Settings'
-DIFF_PATH = 'diff_engine_path'
-DIFF_PATH_3WAY = 'diff_engine_path_3way'
-DIFF_PATH_MULTI = 'diff_engine_path_multi'
-COMPARATORS = 'defined_comparators'
-PREDEFINED_ENGINES = ['', 'diffuse', 'fldiff', 'kdiff3', 'kompare', 'meld', 'tkdiff']
-DEFAULT_DIFF_ENGINE = "meld"
-CONFIG_FILE = os.path.join(xdg.BaseDirectory.xdg_config_home, APP + ".conf")
+sys.path.append("/usr/share/nautilus-compare")
+
+import utils
 
 class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
-	'''Class for Nautilus extension itself'''
+	'''Class for the extension itself'''
 
+	# to hold an item for later comparison
 	for_later = None
-	diff_engine = DEFAULT_DIFF_ENGINE
-	diff_engine_3way = DEFAULT_DIFF_ENGINE
-	diff_engine_multi = ""
 
 	def __init__(self):
 		'''Load config'''
 
-		self.config = ConfigParser.ConfigParser()
-		sections = self.config.read(CONFIG_FILE)
+		self.config = utils.NautilusCompareConfig()
+		self.config.load()
 
-		try:
-			self.diff_engine = self.config.get(SETTINGS_MAIN, DIFF_PATH)
-			self.diff_engine_3way = self.config.get(SETTINGS_MAIN, DIFF_PATH_3WAY)
-			self.diff_engine_multi = self.config.get(SETTINGS_MAIN, DIFF_PATH_MULTI)
-			self.engines = eval(self.config.get(SETTINGS_MAIN, COMPARATORS))
-		except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
-			try:
-				self.config.add_section(SETTINGS_MAIN)
-			except ConfigParser.DuplicateSectionError:
-				pass
-			self.config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
-			self.config.set(SETTINGS_MAIN, DIFF_PATH_3WAY, self.diff_engine_3way)
-			self.config.set(SETTINGS_MAIN, DIFF_PATH_MULTI, self.diff_engine_multi)
-			self.config.set(SETTINGS_MAIN, COMPARATORS, self.engines)
-			with open(CONFIG_FILE, 'wb') as f:
-				self.config.write(f)
-
-	def _open_comparator(self, paths):
+	def menu_activate_cb(self, menu, paths):
+		'''Telling from amount of paths runs appropriate comparator engine'''
 		if len(paths) == 1:
 			self.for_later = paths[0]
 			return
@@ -75,25 +52,24 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 
 		cmd = None
 		if len(paths) == 2:
-			cmd = (self.diff_engine + " " + args + "&")
-		elif len(paths) == 3 and len(self.diff_engine_3way.strip()) > 0:
-			cmd = (self.diff_engine_3way + " " + args + "&")
-		elif len(self.diff_engine_multi.strip()) > 0:
-			cmd = (self.diff_engine_multi + " " + args + "&")
+			cmd = (self.config.diff_engine + " " + args + "&")
+		elif len(paths) == 3 and len(self.config.diff_engine_3way.strip()) > 0:
+			cmd = (self.config.diff_engine_3way + " " + args + "&")
+		elif len(self.config.diff_engine_multi.strip()) > 0:
+			cmd = (self.config.diff_engine_multi + " " + args + "&")
 
 		if cmd is not None:
 			os.system(cmd)
 		
-	def menu_activate_cb(self, menu, paths):
-		self._open_comparator(paths)
-
 	def valid_file(self, file):
+		'''Tests if the file is valid comparable'''
 		if file.get_uri_scheme() == 'file' and file.get_file_type() in (Gio.FileType.DIRECTORY, Gio.FileType.REGULAR, Gio.FileType.SYMBOLIC_LINK):
 			return True
 		else:
 			return False
 
 	def get_file_items(self, window, files):
+		'''Main method to detect what choices should be offered in the context menu'''
 		paths = []
 		for file in files:
 			if self.valid_file(file):
@@ -106,8 +82,8 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 
 		# initialize i18n
 		locale.setlocale(locale.LC_ALL, '')
-		gettext.bindtextdomain(APP)
-		gettext.textdomain(APP)
+		gettext.bindtextdomain(utils.APP)
+		gettext.textdomain(utils.APP)
 		_ = gettext.gettext
 
 		item1 = None
@@ -147,7 +123,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			if self.for_later is not None:
 				if self.for_later not in paths:
 					# if multi compare enabled and in case of 2 files selected 3way compare enabled
-					if len(self.diff_engine_multi.strip()) > 0 or (len(paths) == 2 and len(self.diff_engine_3way.strip()) > 0):
+					if len(self.config.diff_engine_multi.strip()) > 0 or (len(paths) == 2 and len(self.config.diff_engine_3way.strip()) > 0):
 						item1 = Nautilus.MenuItem(
 							name="NautilusCompareExtension::MultiCompare",
 							label=_('Compare to ') + self.for_later,
@@ -159,7 +135,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			# if multi compare enabled, we can compare any number
 			# if there are two files selected we can always compare
 			# if three files selected and 3-way compare is on, we can do it
-			if len(self.diff_engine_multi.strip()) > 0 or len(paths) == 2 or (len(paths) == 3 and len(self.diff_engine_3way.strip()) > 0):
+			if len(self.config.diff_engine_multi.strip()) > 0 or len(paths) == 2 or (len(paths) == 3 and len(self.config.diff_engine_3way.strip()) > 0):
 				item2 = Nautilus.MenuItem(
 					name="NautilusCompareExtension::CompareWithin",
 					label=_('Compare'),
@@ -176,5 +152,4 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 			items.remove(None)
 
 		return items
-
 
