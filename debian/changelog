@@ -1,3 +1,13 @@
+nautilus-compare (0.0.4~oneiric1) oneiric; urgency=low
+
+  * Create setup utility for choosing compare tools.
+  * Add notification about session restart.
+  * Simplify menus a bit (no explicit 3-way compare).
+  * Restructure the code.
+  * Add desktop file.
+
+ -- Guido Tabbernuk <boamaod@gmail.com>  Sat, 29 Oct 2011 02:21:11 +0300
+
 nautilus-compare (0.0.3~oneiric2) oneiric; urgency=medium
 
   * Add settings under ~/.config/nautilus-compare.conf

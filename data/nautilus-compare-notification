@@ -1,0 +1,6 @@
+Name: nautilus-compare-notification
+Priority: High
+Terminal: False
+DontShowAfterReboot: True
+DisplayIf: true
+Description: Nautilus Compare Extension has been installed. A session restart is needed to make it work properly. Once the session is restarted, a new option will emerge in Nautilus context menu. This option lets you compare selected files with your preferred 'diff' application as well as select files for later comparison.

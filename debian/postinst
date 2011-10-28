@@ -1,0 +1,16 @@
+#!/bin/sh
+# postinst script for nautilus-compare
+#
+# see: dh_installdeb(1)
+
+set -e
+
+unud=/var/lib/update-notifier/user.d
+
+if [ -d $unud ]; then
+	cp /usr/share/nautilus-compare/nautilus-compare-notification \
+		/var/lib/update-notifier/user.d/
+	touch /var/lib/update-notifier/dpkg-run-stamp
+fi
+
+#DEBHELPER#

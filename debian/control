@@ -2,18 +2,20 @@ Source: nautilus-compare
 Section: gnome
 Priority: extra
 Maintainer: Guido Tabbernuk <boamaod@gmail.com>
-Build-Depends: debhelper (>= 7)
-Standards-Version: 3.9.1.0
+Uploaders: Andrea Veri <and@debian.org>
+Build-Depends: debhelper (>= 8.0.0), python-support (>= 0.90)
+Standards-Version: 3.9.2
 Homepage: https://launchpad.net/nautilus-compare
 
 Package: nautilus-compare
-Architecture: any
-Depends: nautilus (>= 3), python-nautilus (>= 1.0), python-xdg
+Architecture: all
+Depends: ${misc:Depends}, nautilus (>= 3), python-support (>= 0.90), python-nautilus (>= 1.0), python-xdg
 Recommends: meld
-Description: Context menu extension for Nautilus file manager
- Simple context menu file comparison extension for Nautilus 3.0 and above,
- inspired by the discontinued diff-ext extension. It uses Meld to do the
- actual comparison and provides "Compare", "Compare Later", "Compare to
- ~/foo/bar" and "Three-Way Compare to ~/foo/bar" in Nautilus context menu.
- You can change default Meld to whatever you like from
- ~/.config/nautilus-compare.conf.
+Suggests: kdiff3 | kdiff3-qt, diffuse, kompare, fldiff, tkdiff
+Description: Context menu comparison extension for Nautilus file manager
+ Simple context menu file comparison extension for Nautilus 3 and above,
+ inspired by the discontinued 'diff-ext' extension. By default it uses
+ 'meld' to do the comparison and provides "Compare", "Compare to ~/foo/bar"
+ and "Compare Later" in Nautilus context menu. Using the setup utility you
+ can choose your favourite compare tool for one-on-one, three-way and
+ multi-compare situations.
