@@ -78,6 +78,9 @@ class NautilusCompareExtensionSetup:
 		self.config = utils.NautilusCompareConfig()
 		self.config.load()
 
+		# find out if some new engines have been installed
+		self.config.add_missing_predefined_engines()
+
 		# initialize i18n
 		locale.setlocale(locale.LC_ALL, '')
 		gettext.bindtextdomain(utils.APP)

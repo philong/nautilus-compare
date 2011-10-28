@@ -66,11 +66,7 @@ class NautilusCompareConfig:
 			except ConfigParser.DuplicateSectionError:
 				pass
 
-			# add predefined engines which are installed for now
-			system_utils = os.listdir(COMPARATOR_PATH)
-			for engine in PREDEFINED_ENGINES:
-				if engine not in self.engines and engine in system_utils:
-					self.engines.append(engine)
+			self.add_missing_predefined_engines()
 
 			# add choice for "engine not enabled"
 			# (always needed, because at least self.engines cannot be loaded)
@@ -94,6 +90,14 @@ class NautilusCompareConfig:
 
 			with open(CONFIG_FILE, 'wb') as f:
 				self.config.write(f)
+
+	def add_missing_predefined_engines(self):
+		'''Adds predefined engines which are installed, but missing in engines list.'''
+		system_utils = os.listdir(COMPARATOR_PATH)
+		for engine in PREDEFINED_ENGINES:
+			if engine not in self.engines and engine in system_utils:
+				self.engines.append(engine)
+	
 
 	def save(self):
 		'''Saves config options'''
