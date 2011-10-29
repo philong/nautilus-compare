@@ -6,4 +6,4 @@ GenericName=Preferences for Nautilus Compare Extension
 Icon=gtk-preferences
 Categories=Settings;
 X-Ubuntu-Gettext-Domain=nautilus-compare
-Exec=python /usr/share/nautilus-compare/nautilus-compare-setup.py
+Exec=nautilus-compare-preferences

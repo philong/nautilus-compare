@@ -32,8 +32,8 @@ def combo_add_and_select(combo, text):
 		iter=model.iter_next(iter)
 	combo.set_active_iter(iter)
 
-class NautilusCompareExtensionSetup:
-	'''The main class for setup using PyGTK'''
+class NautilusCompareExtensionPreferences:
+	'''The main class for preferences dialog using PyGTK'''
 
 	combo = None
 	combo_3way = None
@@ -157,6 +157,6 @@ class NautilusCompareExtensionSetup:
 		gtk.main()
 
 if __name__ == "__main__":
-	setup = NautilusCompareExtensionSetup()
-	setup.main()
+	prefs = NautilusCompareExtensionPreferences()
+	prefs.main()
 
