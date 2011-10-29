@@ -23,7 +23,8 @@ import ConfigParser
 APP = 'nautilus-compare'
 
 # settings
-CONFIG_FILE = os.path.join(xdg.BaseDirectory.xdg_config_home, APP + ".conf")
+CONFIG_FILES = [os.path.join(xdg.BaseDirectory.xdg_config_home, APP + ".conf"), os.path.join("/etc", APP + ".conf")]
+CONFIG_FILE = CONFIG_FILES[0]
 SETTINGS_MAIN = 'Settings'
 
 DIFF_PATH = 'diff_engine_path'
@@ -36,7 +37,7 @@ PREDEFINED_ENGINES = ['meld', 'kdiff3', 'diffuse', 'kompare', 'fldiff', 'tkdiff'
 DEFAULT_DIFF_ENGINE = "meld"
 
 # where comparator engines are sought
-COMPARATOR_PATH = '/usr/bin'
+COMPARATOR_PATHS = ['/usr/bin', '/usr/local/bin']
 
 class NautilusCompareConfig:
 
@@ -50,8 +51,14 @@ class NautilusCompareConfig:
 	def load(self):
 		'''Loads config options if available. If not, creates them using the best heuristics availabe.'''
 		self.config = ConfigParser.ConfigParser()
-		self.config.read(CONFIG_FILE)
 
+		# allow system-wide default settings from /etc/*
+		if os.path.isfile(CONFIG_FILES[0]):
+			self.config.read(CONFIG_FILES[0])
+		else:
+			self.config.read(CONFIG_FILES[1])
+
+		# read from start or flush from the point where cancelled
 		try:
 			self.diff_engine = self.config.get(SETTINGS_MAIN, DIFF_PATH)
 			self.diff_engine_3way = self.config.get(SETTINGS_MAIN, DIFF_PATH_3WAY)
@@ -93,7 +100,9 @@ class NautilusCompareConfig:
 
 	def add_missing_predefined_engines(self):
 		'''Adds predefined engines which are installed, but missing in engines list.'''
-		system_utils = os.listdir(COMPARATOR_PATH)
+		system_utils = []
+		for path in COMPARATOR_PATHS:
+			system_utils += os.listdir(path)
 		for engine in PREDEFINED_ENGINES:
 			if engine not in self.engines and engine in system_utils:
 				self.engines.append(engine)
