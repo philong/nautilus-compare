@@ -1,7 +1,0 @@
-debian/tmp/usr/share/locale
-/data/nautilus-compare-preferences.desktop /usr/share/applications/
-/data/nautilus-compare-notification /usr/share/nautilus-compare/
-/src/nautilus-compare.py /usr/share/nautilus-compare/
-/src/utils.py /usr/share/nautilus-compare/
-/src/nautilus-compare-preferences.py /usr/share/nautilus-compare/
-
