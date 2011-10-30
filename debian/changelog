@@ -1,4 +1,4 @@
-nautilus-compare (0.0.4~oneiric1) oneiric; urgency=low
+nautilus-compare (0.0.4~oneiric2) oneiric; urgency=medium
 
   * Create setup utility for choosing compare tools.
   * Find common diff tools from /usr/bin and /usr/local/bin.
