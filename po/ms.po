@@ -1,0 +1,62 @@
+# Malay translation for nautilus-compare
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
+# This file is distributed under the same license as the nautilus-compare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-compare\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-29 02:21+0300\n"
+"PO-Revision-Date: 2011-12-31 18:52+0000\n"
+"Last-Translator: abuyop <Unknown>\n"
+"Language-Team: Malay <ms@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-01-01 05:55+0000\n"
+"X-Generator: Launchpad (build 14560)\n"
+
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
+msgid "Compare to "
+msgstr "Banding dengan "
+
+#: src/nautilus-compare.py:107
+msgid "Compare to the file remembered before"
+msgstr "Banding dengan fail yang sebelum ini diingati"
+
+#: src/nautilus-compare.py:116
+msgid "Compare Later"
+msgstr "Banding Kemudian"
+
+#: src/nautilus-compare.py:117
+msgid "Remember file for later comparison"
+msgstr "Ingat fail untuk perbandingan nanti"
+
+#: src/nautilus-compare.py:130
+msgid "Compare selected files to the file remembered before"
+msgstr "Bandingkan fail pilihan dengan fail yang diingati sebelum ini"
+
+#: src/nautilus-compare.py:141
+msgid "Compare"
+msgstr "Banding"
+
+#: src/nautilus-compare.py:142
+msgid "Compare selected files"
+msgstr "Bandingkan fail pilihan"
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr "Keutamaan Sambungan Nautilus Compare"
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr "Beza Biasa"
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr "Beza Tiga-Cara"
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
+msgstr "Beza N-Cara"
