@@ -1,0 +1,62 @@
+# Greek translation for nautilus-compare
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the nautilus-compare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-compare\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-29 02:21+0300\n"
+"PO-Revision-Date: 2012-12-06 19:32+0000\n"
+"Last-Translator: giorgos000 <giorgos000@gmail.com>\n"
+"Language-Team: Greek <el@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-12-07 04:54+0000\n"
+"X-Generator: Launchpad (build 16341)\n"
+
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
+msgid "Compare to "
+msgstr "Σύγκριση με "
+
+#: src/nautilus-compare.py:107
+msgid "Compare to the file remembered before"
+msgstr "Σύγκριση με το προηγούμενο αρχείο"
+
+#: src/nautilus-compare.py:116
+msgid "Compare Later"
+msgstr ""
+
+#: src/nautilus-compare.py:117
+msgid "Remember file for later comparison"
+msgstr ""
+
+#: src/nautilus-compare.py:130
+msgid "Compare selected files to the file remembered before"
+msgstr ""
+
+#: src/nautilus-compare.py:141
+msgid "Compare"
+msgstr "Σύγκριση"
+
+#: src/nautilus-compare.py:142
+msgid "Compare selected files"
+msgstr "Σύγκριση επιλεγμένων αρχείων"
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr "Προτιμήσεις επέκτασης σύγκρισης του Ναυτίλου"
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr "Κανονική διαφορά"
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr "Τριπλή διαφορά"
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
+msgstr "Πολλαπλή διαφορά"
