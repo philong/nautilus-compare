@@ -1,0 +1,62 @@
+# French translation for nautilus-compare
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the nautilus-compare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-compare\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-29 02:21+0300\n"
+"PO-Revision-Date: 2013-01-08 18:53+0000\n"
+"Last-Translator: Vincent RUIZ <vince2b.linux@orange.fr>\n"
+"Language-Team: French <fr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-01-09 05:22+0000\n"
+"X-Generator: Launchpad (build 16412)\n"
+
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
+msgid "Compare to "
+msgstr "Comparer à "
+
+#: src/nautilus-compare.py:107
+msgid "Compare to the file remembered before"
+msgstr "Comparer au fichier déjà sélectionné"
+
+#: src/nautilus-compare.py:116
+msgid "Compare Later"
+msgstr "Comparer plus tard"
+
+#: src/nautilus-compare.py:117
+msgid "Remember file for later comparison"
+msgstr "Selectionner pour comparaison ultérieure"
+
+#: src/nautilus-compare.py:130
+msgid "Compare selected files to the file remembered before"
+msgstr "Comparer les fichiers sélectionnés avec le fichier déjà mémorisé"
+
+#: src/nautilus-compare.py:141
+msgid "Compare"
+msgstr "Comparer"
+
+#: src/nautilus-compare.py:142
+msgid "Compare selected files"
+msgstr "Comparer les fichiers sélectionnés"
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr "Préférences de l'extension Nautilus Compare"
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr "Diff normal"
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr "Triple comparaison"
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
+msgstr "Comparaison multiple"
