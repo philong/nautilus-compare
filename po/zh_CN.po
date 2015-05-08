@@ -1,0 +1,62 @@
+# Chinese (Simplified) translation for nautilus-compare
+# Copyright (c) 2015 Rosetta Contributors and Canonical Ltd 2015
+# This file is distributed under the same license as the nautilus-compare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-compare\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2011-10-29 02:21+0300\n"
+"PO-Revision-Date: 2015-05-07 14:08+0000\n"
+"Last-Translator: 绿色圣光 <Unknown>\n"
+"Language-Team: Chinese (Simplified) <zh_CN@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2015-05-08 05:21+0000\n"
+"X-Generator: Launchpad (build 17474)\n"
+
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
+msgid "Compare to "
+msgstr "与之比较： "
+
+#: src/nautilus-compare.py:107
+msgid "Compare to the file remembered before"
+msgstr "与之前记住的文件作比较"
+
+#: src/nautilus-compare.py:116
+msgid "Compare Later"
+msgstr "稍后比较"
+
+#: src/nautilus-compare.py:117
+msgid "Remember file for later comparison"
+msgstr "记住文件以便稍后作比较"
+
+#: src/nautilus-compare.py:130
+msgid "Compare selected files to the file remembered before"
+msgstr "将选中的文件跟之前记住的文件作比较"
+
+#: src/nautilus-compare.py:141
+msgid "Compare"
+msgstr "比较"
+
+#: src/nautilus-compare.py:142
+msgid "Compare selected files"
+msgstr "比较选中的文件"
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr "Nautilus 比较扩展首选项"
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr "正常比较"
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr "三路比较"
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
+msgstr "多路比较"
