@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 #    nautilus-compare --- Context menu extension for Nautilus file manager
-#    Copyright (C) 2011  Guido Tabbernuk <boamaod@gmail.com>
+#    Copyright (C) 2015  Märt Põder <tramm@p6drad-teel.net>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
