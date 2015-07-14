@@ -34,7 +34,8 @@ DIFF_PATH_MULTI = 'diff_engine_path_multi'
 COMPARATORS = 'defined_comparators'
 # ordered by preference
 PREDEFINED_ENGINES = ['meld', 'kdiff3', 'diffuse', 'kompare', 'fldiff', 'tkdiff']
-DEFAULT_DIFF_ENGINE = "meld"
+URI_COMPAT_ENGINES = ['meld']
+DEFAULT_DIFF_ENGINE = 'meld'
 
 # where comparator engines are sought
 COMPARATOR_PATHS = ['/usr/bin', '/usr/local/bin']

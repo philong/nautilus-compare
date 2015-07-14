@@ -65,6 +65,8 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		'''Tests if the file is valid comparable'''
 		if file.get_uri_scheme() == 'file' and file.get_file_type() in (Gio.FileType.DIRECTORY, Gio.FileType.REGULAR, Gio.FileType.SYMBOLIC_LINK):
 			return True
+		elif self.config.diff_engine in utils.URI_COMPAT_ENGINES and file.get_location().get_path() is not None and file.get_file_type() in (Gio.FileType.DIRECTORY, Gio.FileType.REGULAR, Gio.FileType.SYMBOLIC_LINK):
+			return True
 		else:
 			return False
 
@@ -73,7 +75,10 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		paths = []
 		for file in files:
 			if self.valid_file(file):
-				path = urllib.unquote(file.get_uri()[7:])
+				if self.config.diff_engine in utils.URI_COMPAT_ENGINES:
+					path = urllib.unquote(file.get_uri())
+				else:
+					path = urllib.unquote(file.get_uri()[7:])
 				paths.append(path)
 
 		# no files selected
