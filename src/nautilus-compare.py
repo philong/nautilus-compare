@@ -103,7 +103,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 				if self.for_later not in paths:
 					item1 = Nautilus.MenuItem(
 						name="NautilusCompareExtension::CompareTo",
-						label=_('Compare to ') + self.for_later,
+						label=_('Compare to ') + utils.prepare_for_menu(self.for_later),
 						tip=_("Compare to the file remembered before")
 					)
 
@@ -126,7 +126,7 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 					if len(self.config.diff_engine_multi.strip()) > 0 or (len(paths) == 2 and len(self.config.diff_engine_3way.strip()) > 0):
 						item1 = Nautilus.MenuItem(
 							name="NautilusCompareExtension::MultiCompare",
-							label=_('Compare to ') + self.for_later,
+							label=_('Compare to ') + utils.prepare_for_menu(self.for_later),
 							tip=_("Compare selected files to the file remembered before")
 						)
 						# compare the one saved for later to the ones selected now

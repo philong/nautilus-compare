@@ -39,6 +39,12 @@ DEFAULT_DIFF_ENGINE = "meld"
 # where comparator engines are sought
 COMPARATOR_PATHS = ['/usr/bin', '/usr/local/bin']
 
+def prepare_for_menu(item):
+	'''Formats file name URI to be compared for less garbage and easier readability.'''
+	prep = item.replace("_", "__") # escaping the underscores to avoid accelerators
+	prep = prep.split("file://").pop() # remove default file descriptor for less garbage
+	return prep
+
 class NautilusCompareConfig:
 
 	diff_engine = DEFAULT_DIFF_ENGINE
