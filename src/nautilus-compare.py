@@ -24,7 +24,7 @@ import locale
 
 from gi.repository import Nautilus, GObject, Gio
 
-sys.path.append("/usr/share/nautilus-compare")
+sys.path.insert(0, "/usr/share/nautilus-compare")
 
 import utils
 
