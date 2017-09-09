@@ -8,42 +8,42 @@ msgstr ""
 "Project-Id-Version: nautilus-compare\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2011-10-29 02:21+0300\n"
-"PO-Revision-Date: 2012-09-10 18:10+0000\n"
-"Last-Translator: Dikay <Unknown>\n"
+"PO-Revision-Date: 2017-09-08 12:45+0000\n"
+"Last-Translator: Tobias Bannert <tobannert@gmail.com>\n"
 "Language-Team: German <de@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2015-07-22 05:29+0000\n"
-"X-Generator: Launchpad (build 17628)\n"
+"X-Launchpad-Export-Date: 2017-09-09 05:23+0000\n"
+"X-Generator: Launchpad (build 18449)\n"
 
 #: src/nautilus-compare.py:106 src/nautilus-compare.py:129
 msgid "Compare to "
-msgstr "Vergleiche mit "
+msgstr "Vergleichen mit "
 
 #: src/nautilus-compare.py:107
 msgid "Compare to the file remembered before"
-msgstr "Vergleiche die zuvor gemerkte Datei"
+msgstr "Die zuvor gemerkte Datei vergleichen"
 
 #: src/nautilus-compare.py:116
 msgid "Compare Later"
-msgstr "Vergleiche später"
+msgstr "Später vergleichen"
 
 #: src/nautilus-compare.py:117
 msgid "Remember file for later comparison"
-msgstr "Merke diese Datei für einen späteren Vergleich"
+msgstr "Datei für einen späteren Vergleich merken"
 
 #: src/nautilus-compare.py:130
 msgid "Compare selected files to the file remembered before"
-msgstr "Vergleiche ausgewählte Dateien mit einer zuvor germerkten Datei"
+msgstr "Ausgewählte Dateien mit einer zuvor germerkten Datei vergleichen"
 
 #: src/nautilus-compare.py:141
 msgid "Compare"
-msgstr "Vergleiche"
+msgstr "Vergleichen"
 
 #: src/nautilus-compare.py:142
 msgid "Compare selected files"
-msgstr "Vergleiche ausgewählte Dateien"
+msgstr "Ausgewählte Dateien vergleichen"
 
 #: src/nautilus-compare-setup.py:92
 msgid "Nautilus Compare Extension Preferences"
