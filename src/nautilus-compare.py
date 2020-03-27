@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 #    nautilus-compare --- Context menu extension for Nautilus file manager
-#    Copyright (C) 2015  Märt Põder <tramm@p6drad-teel.net>
+#    Copyright (C) 2015, 2020  Märt Põder <tramm@p6drad-teel.net>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 import sys
 import os
-import urllib
+import urllib.request, urllib.parse, urllib.error
 import gettext
 import locale
 
@@ -76,9 +76,9 @@ class NautilusCompareExtension(GObject.GObject, Nautilus.MenuProvider):
 		for file in files:
 			if self.valid_file(file):
 				if self.config.diff_engine in utils.URI_COMPAT_ENGINES:
-					path = urllib.unquote(file.get_uri())
+					path = urllib.parse.unquote(file.get_uri())
 				else:
-					path = urllib.unquote(file.get_uri()[7:])
+					path = urllib.parse.unquote(file.get_uri()[7:])
 				paths.append(path)
 
 		# no files selected

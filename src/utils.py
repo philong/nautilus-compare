@@ -1,7 +1,7 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding: utf-8 -*-
 #    nautilus-compare --- Context menu extension for Nautilus file manager
-#    Copyright (C) 2015  Märt Põder <tramm@p6drad-teel.net>
+#    Copyright (C) 2015, 2020  Märt Põder <tramm@p6drad-teel.net>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 import os
 import xdg.BaseDirectory
-import ConfigParser
+import configparser
 
 APP = 'nautilus-compare'
 
@@ -33,7 +33,7 @@ DIFF_PATH_MULTI = 'diff_engine_path_multi'
 
 COMPARATORS = 'defined_comparators'
 # ordered by preference
-PREDEFINED_ENGINES = ['meld', 'kdiff3', 'diffuse', 'kompare', 'fldiff', 'tkdiff']
+PREDEFINED_ENGINES = ['meld', 'kdiff3', 'diffuse', 'kompare', 'fldiff', 'tkdiff', 'xxdiff']
 URI_COMPAT_ENGINES = ['meld']
 DEFAULT_DIFF_ENGINE = 'meld'
 
@@ -57,7 +57,7 @@ class NautilusCompareConfig:
 
 	def load(self):
 		'''Loads config options if available. If not, creates them using the best heuristics availabe.'''
-		self.config = ConfigParser.ConfigParser()
+		self.config = configparser.ConfigParser()
 
 		# allow system-wide default settings from /etc/*
 		if os.path.isfile(CONFIG_FILES[0]):
@@ -72,12 +72,12 @@ class NautilusCompareConfig:
 			self.diff_engine_multi = self.config.get(SETTINGS_MAIN, DIFF_PATH_MULTI)
 			self.engines = eval(self.config.get(SETTINGS_MAIN, COMPARATORS))
 
-		except (ConfigParser.NoOptionError, ConfigParser.NoSectionError):
+		except (configparser.NoOptionError, configparser.NoSectionError):
 
 			# maybe settings were half loaded when exception was thrown
 			try:
 				self.config.add_section(SETTINGS_MAIN)
-			except ConfigParser.DuplicateSectionError:
+			except configparser.DuplicateSectionError:
 				pass
 
 			self.add_missing_predefined_engines()
@@ -100,9 +100,9 @@ class NautilusCompareConfig:
 			self.config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
 			self.config.set(SETTINGS_MAIN, DIFF_PATH_3WAY, self.diff_engine_3way)
 			self.config.set(SETTINGS_MAIN, DIFF_PATH_MULTI, self.diff_engine_multi)
-			self.config.set(SETTINGS_MAIN, COMPARATORS, self.engines)
+			self.config.set(SETTINGS_MAIN, COMPARATORS, str(self.engines))
 
-			with open(CONFIG_FILE, 'wb') as f:
+			with open(CONFIG_FILE, 'w') as f:
 				self.config.write(f)
 
 	def add_missing_predefined_engines(self):
@@ -119,7 +119,7 @@ class NautilusCompareConfig:
 		'''Saves config options'''
 		try:
 			self.config.add_section(SETTINGS_MAIN)
-		except ConfigParser.DuplicateSectionError:
+		except configparser.DuplicateSectionError:
 			pass
 
 		self.config.set(SETTINGS_MAIN, DIFF_PATH, self.diff_engine)
@@ -133,7 +133,7 @@ class NautilusCompareConfig:
 		if self.diff_engine_multi not in self.engines:
 			self.engines.append(self.diff_engine_multi)
 
-		self.config.set(SETTINGS_MAIN, COMPARATORS, self.engines)
-		with open(CONFIG_FILE, 'wb') as f:
+		self.config.set(SETTINGS_MAIN, COMPARATORS, str(self.engines))
+		with open(CONFIG_FILE, 'w') as f:
 			self.config.write(f)
 
