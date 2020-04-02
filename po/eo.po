@@ -1,0 +1,70 @@
+# Esperanto translation for nautilus-compare
+# Copyright (c) 2020 Rosetta Contributors and Canonical Ltd 2020
+# This file is distributed under the same license as the nautilus-compare package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2020.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: nautilus-compare\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2020-03-27 15:09+0200\n"
+"PO-Revision-Date: 2020-04-01 20:55+0000\n"
+"Last-Translator: Kristjan SCHMIDT <Unknown>\n"
+"Language-Team: Esperanto <eo@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2020-04-02 06:30+0000\n"
+"X-Generator: Launchpad (build a296f04231dee355be5db73cc878b9e21689a253)\n"
+
+#: src/nautilus-compare.py:106 src/nautilus-compare.py:129
+msgid "Compare to "
+msgstr "Kompari kun "
+
+#: src/nautilus-compare.py:107
+msgid "Compare to the file remembered before"
+msgstr "Kompari kun la antaŭe markita dosiero"
+
+#: src/nautilus-compare.py:116
+msgid "Compare Later"
+msgstr "Kompari poste"
+
+#: src/nautilus-compare.py:117
+msgid "Remember file for later comparison"
+msgstr "Memori dosieron por posta komparo"
+
+#: src/nautilus-compare.py:130
+msgid "Compare selected files to the file remembered before"
+msgstr "Kompari elektitajn dosierojn kun la antaŭe markita dosiero"
+
+#: src/nautilus-compare.py:141
+msgid "Compare"
+msgstr "Kompari"
+
+#: src/nautilus-compare.py:142
+msgid "Compare selected files"
+msgstr "Kompari elektitajn dosierojn"
+
+#: src/nautilus-compare-setup.py:92
+msgid "Nautilus Compare Extension Preferences"
+msgstr "Agordoj de la Kompara Etendaĵo de Naŭtilo"
+
+#: src/nautilus-compare-setup.py:100
+msgid "Normal Diff"
+msgstr "Normala dosierdiferenco"
+
+#: src/nautilus-compare-setup.py:112
+msgid "Three-Way Diff"
+msgstr "Tri-opa dosierdiferenco"
+
+#: src/nautilus-compare-setup.py:124
+msgid "N-Way Diff"
+msgstr "N-opa dosierdiferenco"
+
+#: src/nautilus-compare-preferences.py:145
+msgid "_Cancel"
+msgstr "_Nuligi"
+
+#: src/nautilus-compare-preferences.py:149
+msgid "_Save"
+msgstr "Kon_servi"
